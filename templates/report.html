@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Report a concern | Guardians of the Roads{% endblock %}
+{% block content %}
+<section class="page-heading"><p class="eyebrow">COMMUNITY INPUT</p><h1>Report a road concern</h1><p class="muted">Save a demonstration report to the local SQLite database.</p></section>
+<section class="two-col">
+<section class="panel"><h2>New report</h2><form method="post" class="report-form">
+<label for="location">Location or landmark *</label><input id="location" name="location" required maxlength="120" placeholder="e.g. near a junction">
+<label for="category">Concern category *</label><select id="category" name="category" required><option value="">Choose a category</option><option>Accident / collision</option><option>Poor lighting</option><option>Road damage</option><option>Unsafe junction</option><option>Traffic congestion</option><option>Other hazard</option></select>
+<label for="description">Details (optional)</label><textarea id="description" name="description" rows="4" maxlength="1000" placeholder="Describe the concern"></textarea><button type="submit">Save report</button></form>
+<p class="small-note">This does not notify authorities or emergency services. For immediate danger, contact local emergency services.</p></section>
+<section class="panel"><h2>Recent demo reports</h2>{% if reports %}<div class="report-list">{% for r in reports %}<article><div class="report-top"><strong>{{ r.category }}</strong><span class="status">{{ r.status }}</span></div><p>{{ r.location }}</p>{% if r.description %}<p class="muted">{{ r.description }}</p>{% endif %}<small>{{ r.created_at }}</small></article>{% endfor %}</div>{% else %}<p class="muted">No reports have been submitted in this local demo yet.</p>{% endif %}</section>
+</section>
+{% endblock %}

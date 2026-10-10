@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Guardians of the Roads{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand-wrap" href="{{ url_for('dashboard') }}"><span class="brand-icon">🛡️</span><span><strong>Guardians of the Roads</strong><small>Road safety decision support</small></span></a>
+  <nav><a href="{{ url_for('dashboard') }}">Dashboard</a><a href="{{ url_for('locations_page') }}">Hotspots</a><a href="{{ url_for('report') }}">Report a concern</a></nav>
+  <span class="demo-badge">DEMO DATA</span>
+</header>
+<main class="container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}{% for category, message in messages %}<div class="notice {{ category }}">{{ message }}</div>{% endfor %}{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+  <footer>HackOverflow 10.0 prototype · Not for emergency or operational traffic decisions · <a href="{{ url_for('health') }}">Service status</a></footer>
+</main>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+{% block scripts %}{% endblock %}
+</body></html>

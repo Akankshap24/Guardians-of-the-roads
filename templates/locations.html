@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Hotspots | Guardians of the Roads{% endblock %}
+{% block content %}
+<section class="page-heading"><p class="eyebrow">LOCATION DIRECTORY</p><h1>Hotspot details</h1><p class="muted">All sample locations, ranked by the demo risk score.</p></section>
+<section class="panel"><div class="table-wrap"><table><thead><tr><th>Location</th><th>Coordinates</th><th>Incidents</th><th>Severe</th><th>Traffic</th><th>Lighting</th><th>Risk score</th><th>Suggested action</th></tr></thead><tbody>
+{% for x in locations %}<tr><td class="location">{{ x.name }}<small>{{ x.road_condition }}</small></td><td>{{ "%.4f"|format(x.latitude) }}, {{ "%.4f"|format(x.longitude) }}</td><td>{{ x.accidents }}</td><td>{{ x.severe }}</td><td>{{ x.traffic }}/100</td><td>{{ x.lighting }}/100</td><td><span class="risk {{ x.risk_level|lower }}">{{ x.risk_level }} · {{ x.risk_score }}</span></td><td>{{ x.recommendation }}</td></tr>{% endfor %}
+</tbody></table></div></section>
+{% endblock %}
